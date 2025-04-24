@@ -6,7 +6,7 @@ def show_home():
     st.title("Morocco Art & Culture Escape Game")
     
     # Hero image
-    st.image("assets/images/carrelage_asset.webp", caption="Journey through Morocco's rich art and cultural heritage")
+    st.image("assets/images/backgrounds/morocco_panorama.jpg", caption="Journey through Morocco's rich art and cultural heritage")
     
     # Introduction text
     st.markdown("""
@@ -33,19 +33,19 @@ def show_home():
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        st.image("assets/images/carrelage_asset.webp", caption="The Traveler")
+        st.image("assets/images/characters/traveler.png", caption="The Traveler")
         traveler_selected = st.button("Select Traveler", key="select_traveler")
         if traveler_selected:
             st.session_state.character = "traveler"
     
     with col2:
-        st.image("assets/images/carrelage_asset.webp", caption="The Artist")
+        st.image("assets/images/characters/artist.png", caption="The Artist")
         artist_selected = st.button("Select Artist", key="select_artist")
         if artist_selected:
             st.session_state.character = "artist"
     
     with col3:
-        st.image("assets/images/carrelage_asset.webp", caption="The Historian")
+        st.image("assets/images/characters/historian.png", caption="The Historian")
         historian_selected = st.button("Select Historian", key="select_historian")
         if historian_selected:
             st.session_state.character = "historian"

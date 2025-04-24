@@ -7,7 +7,7 @@ def show_sahara():
     st.title("Sahara: The Great Desert")
     
     # Region background
-    st.image("/api/placeholder/800/300", caption="The majestic sand dunes of the Sahara")
+    st.image("assets/images/backgrounds/sahara_banner.jpg", caption="The majestic sand dunes of the Sahara")
     
     # Region description
     st.markdown("""

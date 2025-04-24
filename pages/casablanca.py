@@ -7,7 +7,7 @@ def show_casablanca():
     st.title("Casablanca: Modern Morocco")
     
     # Region background
-    st.image("/api/placeholder/800/300", caption="The Hassan II Mosque and Casablanca skyline")
+    st.image("assets/images/backgrounds/casablanca_banner.jpg", caption="The Hassan II Mosque and Casablanca skyline")
     
     # Region description
     st.markdown("""

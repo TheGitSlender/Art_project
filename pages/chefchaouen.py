@@ -7,7 +7,7 @@ def show_chefchaouen():
     st.title("Chefchaouen: The Blue Pearl")
     
     # Region background
-    st.image("/api/placeholder/800/300", caption="The blue streets of Chefchaouen")
+    st.image("assets/images/backgrounds/chefchaouen_banner.jpg", caption="The blue streets of Chefchaouen")
     
     # Region description
     st.markdown("""

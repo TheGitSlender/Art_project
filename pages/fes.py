@@ -7,7 +7,7 @@ def show_fes():
     st.title("Fes: Cultural Heart of Morocco")
     
     # Region background
-    st.image("/api/placeholder/800/300", caption="The ancient medina of Fes")
+    st.image("assets/images/backgrounds/fes_banner.jpg", caption="The ancient medina of Fes")
     
     # Region description
     st.markdown("""

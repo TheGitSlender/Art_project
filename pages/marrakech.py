@@ -7,7 +7,7 @@ def show_marrakech():
     st.title("Marrakech: The Red City")
     
     # Region background
-    st.image("/api/placeholder/800/300", caption="The vibrant medina of Marrakech")
+    st.image("assets/images/backgrounds/marrakech_banner.jpg", caption="The vibrant medina of Marrakech")
     
     # Region description
     st.markdown("""
