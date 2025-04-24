@@ -33,19 +33,19 @@ def show_home():
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        st.image("assets/images/characters/traveler.png", caption="The Traveler")
+        st.image("assets/images/characters/traveler.jpg", caption="The Traveler")
         traveler_selected = st.button("Select Traveler", key="select_traveler")
         if traveler_selected:
             st.session_state.character = "traveler"
     
     with col2:
-        st.image("assets/images/characters/artist.png", caption="The Artist")
+        st.image("assets/images/characters/artist.jpg", caption="The Artist")
         artist_selected = st.button("Select Artist", key="select_artist")
         if artist_selected:
             st.session_state.character = "artist"
     
     with col3:
-        st.image("assets/images/characters/historian.png", caption="The Historian")
+        st.image("assets/images/characters/historian.jpg", caption="The Historian")
         historian_selected = st.button("Select Historian", key="select_historian")
         if historian_selected:
             st.session_state.character = "historian"
