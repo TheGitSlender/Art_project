@@ -334,7 +334,7 @@ def render_pattern_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You solved the pattern.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right pattern. Try again!")
             st.session_state[f"{puzzle_key}_selected"] = []
@@ -361,7 +361,7 @@ def render_word_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You decoded the message.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right word. Try again!")
         
@@ -413,7 +413,7 @@ def render_sequence_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You arranged the sequence perfectly.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right sequence. Try again!")
             st.session_state[f"{puzzle_key}_sequence"] = []
@@ -441,7 +441,7 @@ def render_choice_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You chose the right answer.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right answer. Try again!")
         
@@ -473,7 +473,7 @@ def render_selection_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You selected all the right options.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right selection. Try again!")
         
@@ -516,7 +516,7 @@ def render_path_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You found the right path.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right path. Try again!")
             st.session_state[f"{puzzle_key}_path"] = []
@@ -555,7 +555,7 @@ def render_position_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You placed everything in the right position.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right arrangement. Try again!")
         
@@ -583,7 +583,7 @@ def render_code_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You cracked the final code.")
-            add_artifact(artifacts[puzzle["artifact"]])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right code. Try again!")
         
