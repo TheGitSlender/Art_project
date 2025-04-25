@@ -30,5 +30,5 @@ def show_marrakech():
     
     # Navigation
     st.markdown("---")
-    if st.button("Return to Map"):
+    if st.button("Return to Map",key="marrakech_map"):
         navigate_to("map")

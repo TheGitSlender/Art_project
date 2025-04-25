@@ -30,5 +30,5 @@ def show_sahara():
     
     # Navigation
     st.markdown("---")
-    if st.button("Return to Map"):
+    if st.button("Return to Map",key="sahara_map"):
         navigate_to("map")

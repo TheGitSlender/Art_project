@@ -23,7 +23,7 @@ def load_puzzle_data(region, puzzle_number):
                     "Blue": "Spirituality and protection",
                     "Yellow": "Happiness and prosperity"
                 },
-                "artifact": "Traditional Moroccan lamp"
+                "artifact": "Traditional Moroccan box"
             },
             {
                 "title": "The Geometric Patterns",
@@ -37,7 +37,7 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Decode the ancient script to reveal a traditional Moroccan saying.",
                 "type": "word",
                 "clue": "First letter of each symbol spells the answer",
-                "answer": "hospitality",
+                "answer": "star",
                 "artifact": "Ancient manuscript page"
             }
         ],
@@ -119,7 +119,7 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Arrange the elements of a traditional nomadic tent in the correct positions.",
                 "type": "position",
                 "solution": {"pole": "center", "carpet": "floor", "chest": "west", "tea_set": "east"},
-                "artifact": "Tuareg silver pendant"
+                "artifact": "Tuareg pendant"
             }
         ],
         "casablanca": [
@@ -133,7 +133,7 @@ def load_puzzle_data(region, puzzle_number):
                     "Lalla Essaydi": "Calligraphy and feminist themes",
                     "Mohamed Melehi": "Wave patterns and vibrant colors"
                 },
-                "artifact": "Contemporary art catalog"
+                "artifact": "Contemporary art"
             },
             {
                 "title": "Architectural Timeline",
@@ -146,7 +146,7 @@ def load_puzzle_data(region, puzzle_number):
                 "title": "The Final Code",
                 "description": "Using clues from all regions, decode the message that unlocks the final treasure.",
                 "type": "code",
-                "hint": "Take the first letter from each artifact you've collected",
+                "hint": "The best kingdom in the world!",
                 "answer": "MOROCCO",
                 "artifact": "Golden key to Moroccan cultural heritage"
             }
@@ -161,6 +161,23 @@ def load_puzzle_data(region, puzzle_number):
             "description": "This puzzle is not available yet.",
             "type": "error"
         }
+artifacts = {"Zellige tile fragment": "zellige.png",
+            "Traditional Moroccan box": "box.png",
+            "Traditional leather pouch": "leather_pouch.png",
+            "Blue Fassi pottery piece": "pottery_piece.png",
+            "Decorative metal container": "container.png",
+            "Blue pigment sample": "blue_paint.png",
+            "Berber jewelry piece": "berber_jewel.png",
+            "Traditional flute": "flute.png",
+            "Ancient desert map": "old_map.png",
+            "Krakebs (metal castanets)": "krakeb.jpg",
+            "Tuareg pendant": "ornament.png",
+            "Contemporary art": "painting.png",
+            "Contemporary art": "painting.png",
+            "Architectural drawing": "hassan_2.webp",
+            "Golden key to Moroccan cultural heritage": "morocco.jpg",
+            "Ancient manuscript page": "amazigh_text.jpg",
+            }
 
 def render_puzzle(region):
     """Render the current puzzle for the region."""
@@ -169,8 +186,6 @@ def render_puzzle(region):
     # Check if all puzzles are completed
     if current_puzzle_index >= st.session_state.progress[region]["total_puzzles"]:
         st.success(f"You have completed all puzzles in {region.capitalize()}!")
-        if st.button("Return to Map"):
-            st.session_state.page = "map"
         return
     
     # Load puzzle data
@@ -188,13 +203,13 @@ def render_puzzle(region):
     # If puzzle already answered correctly, show success message
     if st.session_state[puzzle_key]["answered"] and st.session_state[puzzle_key]["correct"]:
         st.success("Puzzle solved correctly! You found a new artifact.")
-        st.image(f"/api/placeholder/200/200", caption=f"Artifact: {puzzle['artifact']}")
+        st.image("assets/images/artifacts/" + artifacts[puzzle["artifact"]], caption=f"Artifact: {puzzle['artifact']}")
         
         if st.button("Continue to next puzzle"):
             advance_puzzle(region)
             # Reset the current puzzle state
             st.session_state[puzzle_key] = {"answered": False, "correct": False, "attempt": None}
-            st.experimental_rerun()
+            st.rerun()
         return
     
     # Render different puzzle types
@@ -275,11 +290,11 @@ def render_matching_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You solved the puzzle.")
-            add_artifact(puzzle["artifact"])
+            add_artifact("assets/images/artifacts/" + artifacts[puzzle["artifact"]])
         else:
             st.error("That's not quite right. Try again!")
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_pattern_puzzle(puzzle, puzzle_key, region):
     """Render a pattern matching puzzle."""
@@ -295,6 +310,7 @@ def render_pattern_puzzle(puzzle, puzzle_key, region):
         with cols[i]:
             tile_key = f"tile_{region}_{i}"
             # Check if this tile is already selected
+            st.image(f"assets/images/tiles/tile_{i+1}.png", caption=f"Tile {i+1}")
             if i+1 in st.session_state[f"{puzzle_key}_selected"]:
                 st.button(f"Tile {i+1} ✓", key=tile_key, disabled=True)
             else:
@@ -308,7 +324,7 @@ def render_pattern_puzzle(puzzle, puzzle_key, region):
     # Reset selection button
     if st.button("Reset Selection", key=f"reset_{puzzle_key}"):
         st.session_state[f"{puzzle_key}_selected"] = []
-        st.experimental_rerun()
+        st.rerun()
     
     # Check pattern when all tiles are selected
     if len(st.session_state[f"{puzzle_key}_selected"]) == len(puzzle["solution"]):
@@ -319,19 +335,19 @@ def render_pattern_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You solved the pattern.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right pattern. Try again!")
             st.session_state[f"{puzzle_key}_selected"] = []
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_word_puzzle(puzzle, puzzle_key, region):
     """Render a word puzzle."""
     st.write("Decode the ancient script to reveal the hidden word:")
     
     # Display a placeholder for the "ancient script"
-    st.image("/api/placeholder/400/100", caption="Ancient script symbols")
+    st.image("assets/images/artifacts/star_amazigh.jpg", caption="Ancient script symbols")
     
     # Input field for answer
     answer = st.text_input("Enter your answer:", key=f"answer_{region}")
@@ -346,11 +362,11 @@ def render_word_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You decoded the message.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right word. Try again!")
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_sequence_puzzle(puzzle, puzzle_key, region):
     """Render a sequence ordering puzzle."""
@@ -387,7 +403,7 @@ def render_sequence_puzzle(puzzle, puzzle_key, region):
     # Reset button
     if st.button("Reset Sequence", key=f"reset_{puzzle_key}"):
         st.session_state[f"{puzzle_key}_sequence"] = []
-        st.experimental_rerun()
+        st.rerun()
     
     # Check if sequence is complete
     if len(st.session_state[f"{puzzle_key}_sequence"]) == len(puzzle["solution"]):
@@ -398,12 +414,12 @@ def render_sequence_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You arranged the sequence perfectly.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right sequence. Try again!")
             st.session_state[f"{puzzle_key}_sequence"] = []
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_choice_puzzle(puzzle, puzzle_key, region):
     """Render a multiple choice puzzle."""
@@ -426,11 +442,11 @@ def render_choice_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You chose the right answer.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right answer. Try again!")
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_selection_puzzle(puzzle, puzzle_key, region):
     """Render a multiple selection puzzle."""
@@ -458,11 +474,11 @@ def render_selection_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You selected all the right options.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right selection. Try again!")
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_path_puzzle(puzzle, puzzle_key, region):
     """Render a path finding puzzle."""
@@ -485,12 +501,12 @@ def render_path_puzzle(puzzle, puzzle_key, region):
         with cols[i]:
             if st.button(direction.capitalize(), key=f"dir_{region}_{i}"):
                 st.session_state[f"{puzzle_key}_path"].append(direction)
-                st.experimental_rerun()
+                st.rerun()
     
     # Reset path button
     if st.button("Reset Path", key=f"reset_{puzzle_key}"):
         st.session_state[f"{puzzle_key}_path"] = []
-        st.experimental_rerun()
+        st.rerun()
     
     # Check path if it matches the solution length
     if len(st.session_state[f"{puzzle_key}_path"]) == len(puzzle["solution"]):
@@ -501,12 +517,12 @@ def render_path_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You found the right path.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right path. Try again!")
             st.session_state[f"{puzzle_key}_path"] = []
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_position_puzzle(puzzle, puzzle_key, region):
     """Render a positioning puzzle."""
@@ -540,11 +556,11 @@ def render_position_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You placed everything in the right position.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right arrangement. Try again!")
         
-        st.experimental_rerun()
+        st.rerun()
 
 def render_code_puzzle(puzzle, puzzle_key, region):
     """Render a code/password puzzle."""
@@ -568,8 +584,8 @@ def render_code_puzzle(puzzle, puzzle_key, region):
         
         if correct:
             st.success("Correct! You cracked the final code.")
-            add_artifact(puzzle["artifact"])
+            add_artifact(artifacts[puzzle["artifact"]])
         else:
             st.error("That's not the right code. Try again!")
         
-        st.experimental_rerun()
+        st.rerun()

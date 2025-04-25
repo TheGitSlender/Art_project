@@ -13,7 +13,7 @@ def show_map():
         st.write(f"Score: **{st.session_state.score}** points")
     
     # Map image (placeholder)
-    st.image("assets/images/backgrounds/morocco_map.png", caption="Map of Morocco")
+    st.image("assets/images/backgrounds/morocco_map.png", caption="Map of Morocco", use_container_width=True)
     
     # Region selection
     st.subheader("Select a Region to Explore")
@@ -25,7 +25,7 @@ def show_map():
     with col1:
         st.markdown("<div class='region-card'>", unsafe_allow_html=True)
         st.subheader("Marrakech")
-        st.image("assets/images/backgrounds/marrakech_thumbnail.jpg", caption="The Red City")
+        st.image("assets/images/backgrounds/marrakech_thumbnail.jpg", caption="The Red City", use_container_width=True)
         
         # Check if completed or unlocked
         if "marrakech" in st.session_state.completed_regions:
@@ -43,7 +43,7 @@ def show_map():
     with col2:
         st.markdown("<div class='region-card'>", unsafe_allow_html=True)
         st.subheader("Fes")
-        st.image("assets/images/backgrounds/fes_thumbnail.jpg", caption="The Cultural Capital")
+        st.image("assets/images/backgrounds/fes_thumbnail.jpg", caption="The Cultural Capital", use_container_width=True)
         
         # Check if completed or unlocked
         if "fes" in st.session_state.completed_regions:
@@ -63,7 +63,7 @@ def show_map():
     with col1:
         st.markdown("<div class='region-card'>", unsafe_allow_html=True)
         st.subheader("Chefchaouen")
-        st.image("assets/images/backgrounds/chefchaouen_thumbnail.jpg", caption="The Blue Pearl")
+        st.image("assets/images/backgrounds/chefchaouen_thumbnail.jpg", caption="The Blue Pearl", use_container_width=True)
         
         # Check if completed or unlocked
         if "chefchaouen" in st.session_state.completed_regions:
@@ -81,7 +81,7 @@ def show_map():
     with col2:
         st.markdown("<div class='region-card'>", unsafe_allow_html=True)
         st.subheader("Sahara")
-        st.image("assets/images/backgrounds/sahara_thumbnail.jpg", caption="The Desert")
+        st.image("assets/images/backgrounds/sahara_thumbnail.jpg", caption="The Desert", use_container_width=True)
         
         # Check if completed or unlocked
         if "sahara" in st.session_state.completed_regions:
@@ -100,7 +100,7 @@ def show_map():
     with col2:
         st.markdown("<div class='region-card'>", unsafe_allow_html=True)
         st.subheader("Casablanca")
-        st.image("assets/images/backgrounds/casablanca_thumbnail.jpg", caption="Modern Morocco")
+        st.image("assets/images/backgrounds/casablanca_thumbnail.jpg", caption="Modern Morocco", use_container_width=True)
         
         # Check if completed or unlocked
         if "casablanca" in st.session_state.completed_regions:
@@ -122,12 +122,13 @@ def show_map():
         # Display artifacts in a grid
         num_artifacts = len(st.session_state.artifacts_collected)
         cols = st.columns(min(4, num_artifacts))
-        
+        pattern = r'([^/]+\.png)'
+
         for i, artifact in enumerate(st.session_state.artifacts_collected):
             with cols[i % min(4, num_artifacts)]:
-                st.image("assets/images/artifacts/{artifact_name}.png", caption=artifact)
+               st.image(artifact, caption=artifact.split("/")[-1].split(".")[0], use_container_width=True)
     
     # Return to home button
     st.markdown("---")
-    if st.button("Return to Main Menu"):
+    if st.button("Return to Main Menu", key="return_to_home"):
         navigate_to("home")
