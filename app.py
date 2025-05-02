@@ -54,7 +54,7 @@ st.markdown("""
 def main():
     # Initialize session state
     initialize_session_state()
-    unlock_region("chefchaouen")
+    unlock_region("marrakech")
     # Navigation based on session state
     if st.session_state.page == "home":
         show_home()

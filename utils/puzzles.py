@@ -97,14 +97,6 @@ def load_puzzle_data(region, puzzle_number):
                 },
                 "clue": "These symbols are often seen in Berber tattoos, jewelry, and textiles."
                 ,"artifact": "Berber jewelry piece"
-            },
-            {
-                "title": "The Mountain Song",
-                "description": "Arrange the verses of this traditional Rif mountain song in the correct order.",
-                "type": "sequence",
-                "solution": [3, 1, 4, 2],
-                "clue": "Listen for how the song builds in rhythm and meaning — start with the greeting verse.",
-                "artifact": "Traditional flute"
             }
         ],
         "sahara": [
@@ -119,8 +111,8 @@ def load_puzzle_data(region, puzzle_number):
             {
                 "title": "The Rhythm of the Desert",
                 "description": "Create the correct rhythm pattern of traditional Gnawa music.",
-                "type": "pattern",
-                "solution": [1, 3, 3, 2, 4],
+                "type": "path",
+                "solution": ["slow", "repeat", "medium", "fast"],
                 "clue": "Start slow, repeat, then quicken the pace like a Gnawa trance rhythm.",
                 "artifact": "Krakebs (metal castanets)"
             },
@@ -161,7 +153,7 @@ def load_puzzle_data(region, puzzle_number):
                 "type": "code",
                 "hint": "The best kingdom in the world!",
                 "answer": "MOROCCO",
-                "artifact": "Golden key to Moroccan cultural heritage"
+                "artifact": "Iron key to Moroccan cultural heritage"
             }
         ]
     }
@@ -181,7 +173,6 @@ artifacts = {"Zellige tile fragment": "zellige.png",
             "Decorative metal container": "container.jpg",
             "Blue pigment sample": "blue_paint.jpg",
             "Berber jewelry piece": "berber_jewel.jpg",
-            "Traditional flute": "flute.jpg",
             "Ancient desert map": "old_map.jpg",
             "Krakebs (metal castanets)": "krakeb.jpg",
             "Tuareg pendant": "ornament.png",
@@ -496,8 +487,11 @@ def render_path_puzzle(puzzle, puzzle_key, region):
     """Render a path finding puzzle."""
     st.write("Select the directions to navigate correctly:")
     
-    directions = ["north", "east", "south", "west"]
-    
+    if puzzle["title"] == "The Rhythm of the Desert":
+        directions = ["slow", "fast", "medium", "repeat"]
+    else:
+        directions = ["north", "east", "south", "west"]
+
     # Initialize path if not exists
     if f"{puzzle_key}_path" not in st.session_state:
         st.session_state[f"{puzzle_key}_path"] = []
