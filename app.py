@@ -8,6 +8,10 @@ from pages.chefchaouen import show_chefchaouen
 from pages.sahara import show_sahara
 from pages.casablanca import show_casablanca
 
+
+from utils.session import unlock_region
+
+
 # Set page config
 st.set_page_config(
     page_title="Morocco Art & Culture Escape Game",
@@ -50,7 +54,7 @@ st.markdown("""
 def main():
     # Initialize session state
     initialize_session_state()
-    
+    unlock_region("chefchaouen")
     # Navigation based on session state
     if st.session_state.page == "home":
         show_home()

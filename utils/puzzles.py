@@ -23,6 +23,7 @@ def load_puzzle_data(region, puzzle_number):
                     "Blue": "Spirituality and protection",
                     "Yellow": "Happiness and prosperity"
                 },
+                "clue": "Think of how each color would guide emotions or rituals in Moroccan daily life.",
                 "artifact": "Traditional Moroccan box"
             },
             {
@@ -30,13 +31,14 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Arrange the tile patterns to complete the traditional Zellige mosaic.",
                 "type": "pattern",
                 "solution": [1, 3, 4, 2],
+                "clue": "Symmetry and balance are key in Moroccan Zellige art - look for repeating motifs.",
                 "artifact": "Zellige tile fragment"
             },
             {
                 "title": "The Hidden Phrase",
                 "description": "Decode the ancient script to reveal a traditional Moroccan saying.",
                 "type": "word",
-                "clue": "First letter of each symbol spells the answer",
+                "clue": "A celestial body that guides travelers.",
                 "answer": "star",
                 "artifact": "Ancient manuscript page"
             }
@@ -46,7 +48,8 @@ def load_puzzle_data(region, puzzle_number):
                 "title": "The Tannery Challenge",
                 "description": "Arrange the dye vats in the correct sequence to create the famous Fes leather.",
                 "type": "sequence",
-                "solution": ["yellow", "red", "blue", "green"],
+                "solution": ["yellow", "red", "green", "blue"],
+                "clue": "Follow the process from lightest to darkest dyes as traditionally done in the tanneries.",
                 "artifact": "Traditional leather pouch"
             },
             {
@@ -54,6 +57,7 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Select the correct tools to create Fassi pottery in the right order.",
                 "type": "sequence",
                 "solution": ["clay", "wheel", "kiln", "glaze"],
+                "clue": "Consider how raw clay transforms step by step into decorated pottery.",
                 "artifact": "Blue Fassi pottery piece"
             },
             {
@@ -62,6 +66,7 @@ def load_puzzle_data(region, puzzle_number):
                 "type": "selection",
                 "options": ["Arabesque", "Kufic", "Geometric stars", "Floral motifs"],
                 "correct": [0, 2, 3],
+                "clue": "Focus on designs often seen on trays, lamps, and doors in Fes medina.",
                 "artifact": "Decorative metal container"
             }
         ],
@@ -77,6 +82,7 @@ def load_puzzle_data(region, puzzle_number):
                     "To keep buildings cool"
                 ],
                 "answer": 1,
+                "clue": "Think of spiritual symbolism rather than practical purposes.",
                 "artifact": "Blue pigment sample"
             },
             {
@@ -86,16 +92,18 @@ def load_puzzle_data(region, puzzle_number):
                 "options": {
                     "ⵣ": "Free person",
                     "⵰": "Fertility",
-                    "⵲": "Protection",
-                    "⵷": "Eternity"
+                    "ⴶ": "Symmetery",
+                    "ⴲ": "Wholeness"
                 },
-                "artifact": "Berber jewelry piece"
+                "clue": "These symbols are often seen in Berber tattoos, jewelry, and textiles."
+                ,"artifact": "Berber jewelry piece"
             },
             {
                 "title": "The Mountain Song",
                 "description": "Arrange the verses of this traditional Rif mountain song in the correct order.",
                 "type": "sequence",
                 "solution": [3, 1, 4, 2],
+                "clue": "Listen for how the song builds in rhythm and meaning — start with the greeting verse.",
                 "artifact": "Traditional flute"
             }
         ],
@@ -105,6 +113,7 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Use the stars to find your way across the Sahara to the oasis.",
                 "type": "path",
                 "solution": ["north", "east", "east", "south"],
+                "clue": "The North Star will guide you first, and remember — oases often lie southward.",
                 "artifact": "Ancient desert map"
             },
             {
@@ -112,6 +121,7 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Create the correct rhythm pattern of traditional Gnawa music.",
                 "type": "pattern",
                 "solution": [1, 3, 3, 2, 4],
+                "clue": "Start slow, repeat, then quicken the pace like a Gnawa trance rhythm.",
                 "artifact": "Krakebs (metal castanets)"
             },
             {
@@ -119,6 +129,7 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Arrange the elements of a traditional nomadic tent in the correct positions.",
                 "type": "position",
                 "solution": {"pole": "center", "carpet": "floor", "chest": "west", "tea_set": "east"},
+                "clue": "Hospitality rules: tea is served facing east; valuables rest safely to the west.",
                 "artifact": "Tuareg pendant"
             }
         ],
@@ -133,6 +144,7 @@ def load_puzzle_data(region, puzzle_number):
                     "Lalla Essaydi": "Calligraphy and feminist themes",
                     "Mohamed Melehi": "Wave patterns and vibrant colors"
                 },
+                "clue": "Match each artist's hallmark motifs to their signature materials and themes.",
                 "artifact": "Contemporary art"
             },
             {
@@ -140,6 +152,7 @@ def load_puzzle_data(region, puzzle_number):
                 "description": "Arrange these Casablanca buildings in the order they were constructed.",
                 "type": "sequence",
                 "solution": ["Mahkama du Pacha", "Habous Quarter", "Hassan II Mosque", "Morocco Mall"],
+                "clue": "Start with historical landmarks before moving to modern marvels.",
                 "artifact": "Architectural drawing"
             },
             {
@@ -384,15 +397,15 @@ def render_sequence_puzzle(puzzle, puzzle_key, region):
         st.session_state[f"{puzzle_key}_sequence"] = []
     
     st.write("Arrange these items in the correct sequence:")
-    
+
     # Display items to select
     cols = st.columns(len(shuffled_items))
     for i, item in enumerate(shuffled_items):
         with cols[i]:
             if item in st.session_state[f"{puzzle_key}_sequence"]:
-                st.button(f"{item} ✓", disabled=True, key=f"seq_{region}_{i}")
+                st.button(f"{item} ✓", disabled=True, key=f"seq__{i}")
             else:
-                if st.button(item, key=f"seq_{region}_{i}"):
+                if st.button(f"{item}", key=f"seq__{i}"):
                     st.session_state[f"{puzzle_key}_sequence"].append(item)
     
     # Display current sequence
