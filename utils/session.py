@@ -21,7 +21,7 @@ def initialize_session_state():
         st.session_state.progress = {
             "marrakech": {"current_puzzle": 0, "total_puzzles": 3, "completed": False},
             "fes": {"current_puzzle": 0, "total_puzzles": 3, "completed": False},
-            "chefchaouen": {"current_puzzle": 0, "total_puzzles": 3, "completed": False},
+            "chefchaouen": {"current_puzzle": 0, "total_puzzles": 2, "completed": False},
             "sahara": {"current_puzzle": 0, "total_puzzles": 3, "completed": False},
             "casablanca": {"current_puzzle": 0, "total_puzzles": 3, "completed": False}
         }
